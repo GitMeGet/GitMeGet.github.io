@@ -491,15 +491,6 @@ fieldset[disabled] .btn-success.active {
   display: none;
 }
 
-.profile_pic {
-  width: 300px;
-  height: 300px;
-  border-radius: 50%; /*don't forget prefixes*/
-  background-image: url("path/to/image");
-  background-position: center center;
-  /* as mentioned by Vad: */
-  background-size: cover;
-}
 #skipnav a {
   padding: 6px;
   position: absolute;
