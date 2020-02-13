@@ -1,0 +1,9 @@
+# install correct jekyll version
+- gem install jekyll -v 3.8.5
+- gem uninstall jekyll -v 4.0.0
+
+# make sure version convention is followed
+- jekyll _3.8.5_ new .
+
+# grab versions from github page
+https://github.com/chrisbo246/memoriser/blob/de92d8fa0bca72b1aa0acd01e2cbd398638e14ee/Gemfile
