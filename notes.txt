@@ -5,5 +5,5 @@
 # make sure version convention is followed
 - jekyll _3.8.5_ new .
 
-# grab versions from github page
+# grab correct versions from github page
 https://github.com/chrisbo246/memoriser/blob/de92d8fa0bca72b1aa0acd01e2cbd398638e14ee/Gemfile
