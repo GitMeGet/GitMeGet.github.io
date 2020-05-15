@@ -20,6 +20,7 @@ function displayGame(game) {
   x.innerHTML = game.name;
   var link = document.getElementById("URLbox");
   link.setAttribute("href", game.url);
+  link.innerHTML = "Link";
 }
 
 function chooseGame(simple_flag, num_players, category) {
@@ -72,7 +73,7 @@ function chooseGame(simple_flag, num_players, category) {
 </form>
 
 <div id="Textbox"></div>
-<a href="#" id="URLbox">Link</a>
+<a href="#" id="URLbox"></a>
 
 
 </html>
