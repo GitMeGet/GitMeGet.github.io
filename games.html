@@ -17,7 +17,9 @@ function displayText(text) {
 
 function displayGame(game) {
   var x = document.getElementById("Textbox");
-  x.innerHTML = game.name + game.url;
+  x.innerHTML = game.name;
+  var link = document.getElementById("URLbox");
+  link.setAttribute("href", game.url);
 }
 
 function chooseGame(simple_flag, num_players, category) {
@@ -65,11 +67,12 @@ function chooseGame(simple_flag, num_players, category) {
         <option value="GAME COLLECTION">GAME COLLECTION</option>
         <option value="KIDS GAMES">KIDS GAMES</option>
         <option value="POINT AND CLICK">POINT AND CLICK</option>        
-    </select>
-    <input type="submit" value="Submit">
+    </select>   
+    <input type="submit" value="Randomize">
 </form>
 
 <div id="Textbox"></div>
+<a href="#" id="URLbox">Link</a>
 
 
 </html>
