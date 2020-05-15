@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="UTF-8">
+
+<!-- Load JSON data -->
+<script type="text/javascript" src="game_data.json"></script>
+
+<script>
+function randomInt(min, max) { // min and max included 
+  return Math.floor(Math.random() * (max - min + 1) + min);
+}
+
+function displayText(text) {
+  var x = document.getElementById("Textbox");
+  x.innerHTML = text;
+}
+
+function displayGame(game) {
+  var x = document.getElementById("Textbox");
+  x.innerHTML = game.name + game.url;
+}
+
+function chooseGame(simple_flag, num_players, category) {
+    var filteredGames;
+    if (category !== "ANY"){
+        filteredGames = data.filter(function (game) {
+          return game.simple == simple_flag &&
+                 game.min_players <= num_players &&
+                 game.max_players >= num_players &&
+                 game.cat === category;
+        });
+    } else {
+        filteredGames = data;
+    }
+    if (filteredGames.length == 0) {
+        displayText("Sorry, no games were found");
+    } else {
+        var randomGameIdx = randomInt(0, filteredGames.length);
+        var chosenGame = filteredGames[randomGameIdx];
+        displayGame(chosenGame);
+    }
+    
+    // prevent page from reloading
+    return false;
+}
+</script>
+
+<form onsubmit="return chooseGame(simple_flag.checked, num_players.value, category.value);" class="my-form">
+    <label for="simple_flag">Simple to setup</label>
+    <input id="simple_flag" type="checkbox"><br>
+    <label for="num_players">Number of players</label>    
+    <input id="num_players" type="number" required><br>
+    <label for="category">Category</label>
+    <select id="category">
+        <option value="ANY">ANY</option>    
+        <option value="BOARD GAMES">BOARD GAMES</option>
+        <option value="CARD GAMES">CARD GAMES</option>
+        <option value="DRAWING GAMES">DRAWING GAMES</option>
+        <option value="INCREMENTAL GAMES">INCREMENTAL GAMES</option>
+        <option value="PUZZLES">PUZZLES</option>
+        <option value="ACTION">ACTION</option>
+        <option value="SOCIAL">SOCIAL</option>
+        <option value="SOLO GAMES">SOLO GAMES</option>
+        <option value="WORD GAMES">WORD GAMES</option>
+        <option value="GAME COLLECTION">GAME COLLECTION</option>
+        <option value="KIDS GAMES">KIDS GAMES</option>
+        <option value="POINT AND CLICK">POINT AND CLICK</option>        
+    </select>
+    <input type="submit" value="Submit">
+</form>
+
+<div id="Textbox"></div>
+
+
+</html>
