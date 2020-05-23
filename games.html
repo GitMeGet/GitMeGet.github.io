@@ -23,24 +23,61 @@ function displayGame(game) {
   link.innerHTML = "Link";
 }
 
-function chooseGame(simple_flag, num_players, category) {
-    var filteredGames;
+function generateTableHead(table, data) {
+  let thead = table.createTHead();
+  let row = thead.insertRow();
+  for (let key of data) {
+    let th = document.createElement("th");
+    let text = document.createTextNode(key);
+    th.appendChild(text);
+    row.appendChild(th);
+  }
+}
+
+function generateTable(table, data) {
+  for (let element of data) {
+    let row = table.insertRow();
+      let cell = row.insertCell();
+      let text = document.createTextNode(element['name']);
+      cell.appendChild(text);
+      cell = row.insertCell();
+      cell.innerHTML=  '<a href=' + element.url + '>Link</a>';
+
+  }
+}
+
+function chooseGame(simple_flag, num_players, category, selection) {    
+    var filteredGames = data.filter(function (game) {
+      return game.simple == simple_flag &&
+             game.min_players <= num_players &&
+             game.max_players >= num_players;
+    });
     if (category !== "ANY"){
         filteredGames = data.filter(function (game) {
-          return game.simple == simple_flag &&
-                 game.min_players <= num_players &&
-                 game.max_players >= num_players &&
-                 game.cat === category;
+          return game.cat === category;
         });
-    } else {
-        filteredGames = data;
     }
+    
     if (filteredGames.length == 0) {
         displayText("Sorry, no games were found");
     } else {
-        var randomGameIdx = randomInt(0, filteredGames.length);
-        var chosenGame = filteredGames[randomGameIdx];
-        displayGame(chosenGame);
+        if (selection === "Random") {
+            var randomGameIdx = randomInt(0, filteredGames.length);
+            var chosenGame = filteredGames[randomGameIdx];
+            displayGame(chosenGame);
+            // TODO: hide table
+        } else if (selection === "All") {
+            // only display name and url for each game
+            var displayData = [];
+            filteredGames.forEach(function (game, index) {
+                var dict = {'name':game.name, url:game.url};
+                displayData.push(dict);
+            });
+            let table = document.querySelector("table");
+            generateTableHead(table, Object.keys(displayData[0]));
+            generateTable(table, displayData);
+            // TODO: hide textbox and url
+        }
     }
     
     // prevent page from reloading
@@ -48,9 +85,9 @@ function chooseGame(simple_flag, num_players, category) {
 }
 </script>
 
-<form onsubmit="return chooseGame(simple_flag.checked, num_players.value, category.value);" class="my-form">
+<form onsubmit="return chooseGame(simple_flag.checked, num_players.value, category.value, btnType);" class="my-form">
     <label for="simple_flag">Simple to setup</label>
-    <input id="simple_flag" type="checkbox"><br>
+    <input id="simple_flag" type="checkbox" checked=true><br>
     <label for="num_players">Number of players</label>    
     <input id="num_players" type="number" required><br>
     <label for="category">Category</label>
@@ -68,12 +105,18 @@ function chooseGame(simple_flag, num_players, category) {
         <option value="GAME COLLECTION">GAME COLLECTION</option>
         <option value="KIDS GAMES">KIDS GAMES</option>
         <option value="POINT AND CLICK">POINT AND CLICK</option>        
-    </select>   
-    <input type="submit" value="Randomize">
+    </select>
+    <input onclick="btnType=this.value;" type="submit" value="Random" />
+    <input onclick="btnType=this.value;" type="submit" value="All" />  
 </form>
 
+<br>
 <div id="Textbox"></div>
 <a href="#" id="URLbox"></a>
 
+<br><br>
+<table>
+<!-- here goes our data! -->
+</table>
 
 </html>
