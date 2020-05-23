@@ -7,7 +7,6 @@
 </head>
 
 <body>
-    <div class="jumbotron">
     <form onsubmit="return chooseGame(simple_flag.checked, num_players.value, category.value, btnType);" class="my-form">
         <label for="simple_flag">Simple to setup</label>
         <input id="simple_flag" type="checkbox" checked=true><br>
@@ -41,7 +40,6 @@
     <table>
     <!-- here goes our data! -->
     </table>
-    </div>
 </body>
 
 <!-- Load JSON data -->
@@ -109,13 +107,16 @@ function chooseGame(simple_flag, num_players, category, selection) {
             displayGame(chosenGame);
             // TODO: hide table
         } else if (selection === "All") {
+            let table = document.querySelector("table");
+            // delete previous entries
+            table.innerHTML = "";
+        
             // only display name and url for each game
             var displayData = [];
             filteredGames.forEach(function (game, index) {
                 var dict = {'name':game.name, url:game.url};
                 displayData.push(dict);
             });
-            let table = document.querySelector("table");
             generateTableHead(table, Object.keys(displayData[0]));
             generateTable(table, displayData);
             // TODO: hide textbox and url
