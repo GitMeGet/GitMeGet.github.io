@@ -1,6 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
-<meta charset="UTF-8">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+    <div class="jumbotron">
+    <form onsubmit="return chooseGame(simple_flag.checked, num_players.value, category.value, btnType);" class="my-form">
+        <label for="simple_flag">Simple to setup</label>
+        <input id="simple_flag" type="checkbox" checked=true><br>
+        <label for="num_players">Number of players</label>    
+        <input id="num_players" type="number" required><br>
+        <label for="category">Category</label>
+        <select id="category">
+            <option value="ANY">ANY</option>    
+            <option value="BOARD GAMES">BOARD GAMES</option>
+            <option value="CARD GAMES">CARD GAMES</option>
+            <option value="DRAWING GAMES">DRAWING GAMES</option>
+            <option value="INCREMENTAL GAMES">INCREMENTAL GAMES</option>
+            <option value="PUZZLES">PUZZLES</option>
+            <option value="ACTION">ACTION</option>
+            <option value="SOCIAL">SOCIAL</option>
+            <option value="SOLO GAMES">SOLO GAMES</option>
+            <option value="WORD GAMES">WORD GAMES</option>
+            <option value="GAME COLLECTION">GAME COLLECTION</option>
+            <option value="KIDS GAMES">KIDS GAMES</option>
+            <option value="POINT AND CLICK">POINT AND CLICK</option>        
+        </select>
+        <input onclick="btnType=this.value;" type="submit" value="Random" />
+        <input onclick="btnType=this.value;" type="submit" value="All" />  
+    </form>
+
+    <br>
+    <div id="Textbox"></div>
+    <a href="#" id="URLbox"></a>
+
+    <br><br>
+    <table>
+    <!-- here goes our data! -->
+    </table>
+    </div>
+</body>
 
 <!-- Load JSON data -->
 <script type="text/javascript" src="game_data.json"></script>
@@ -84,39 +126,5 @@ function chooseGame(simple_flag, num_players, category, selection) {
     return false;
 }
 </script>
-
-<form onsubmit="return chooseGame(simple_flag.checked, num_players.value, category.value, btnType);" class="my-form">
-    <label for="simple_flag">Simple to setup</label>
-    <input id="simple_flag" type="checkbox" checked=true><br>
-    <label for="num_players">Number of players</label>    
-    <input id="num_players" type="number" required><br>
-    <label for="category">Category</label>
-    <select id="category">
-        <option value="ANY">ANY</option>    
-        <option value="BOARD GAMES">BOARD GAMES</option>
-        <option value="CARD GAMES">CARD GAMES</option>
-        <option value="DRAWING GAMES">DRAWING GAMES</option>
-        <option value="INCREMENTAL GAMES">INCREMENTAL GAMES</option>
-        <option value="PUZZLES">PUZZLES</option>
-        <option value="ACTION">ACTION</option>
-        <option value="SOCIAL">SOCIAL</option>
-        <option value="SOLO GAMES">SOLO GAMES</option>
-        <option value="WORD GAMES">WORD GAMES</option>
-        <option value="GAME COLLECTION">GAME COLLECTION</option>
-        <option value="KIDS GAMES">KIDS GAMES</option>
-        <option value="POINT AND CLICK">POINT AND CLICK</option>        
-    </select>
-    <input onclick="btnType=this.value;" type="submit" value="Random" />
-    <input onclick="btnType=this.value;" type="submit" value="All" />  
-</form>
-
-<br>
-<div id="Textbox"></div>
-<a href="#" id="URLbox"></a>
-
-<br><br>
-<table>
-<!-- here goes our data! -->
-</table>
 
 </html>
